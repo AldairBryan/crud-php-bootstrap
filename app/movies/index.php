@@ -14,7 +14,7 @@
 
         <div class="row justify-content-end">
             <div class="col-auto">
-                <a href="#" class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i> New Register</a>
+                <a href="" class="btn btn-primary"data-bs-toggle="modal" data-bs-target="#newModal"><i class="fa-solid fa-circle-plus"></i> New Register</a>
             </div>
         </div>
         <table class="table table-sm table-stripped table-hover mt-4">
@@ -33,6 +33,7 @@
             </tbody>
         </table>
     </div>
+    <?php include 'newModal.php'; ?>
     <script src="../../assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
