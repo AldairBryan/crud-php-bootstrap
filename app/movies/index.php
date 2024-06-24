@@ -1,5 +1,9 @@
 <?php
 require '../config/database.php';
+$sqlMovies = "SELECT m.id, m.name, m.description, g.name AS genre FROM movie AS m 
+INNER JOIN genre as g 
+ON m.id_genre=g.id";
+$movies = $conn->query($sqlMovies);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +36,15 @@ require '../config/database.php';
                 </tr>
             </thead>
             <tbody>
-
+                <?php while($row_movie = $movies->fetch_assoc()){ ?>
+                    <tr>
+                        <td><?=$row_movie['id']; ?></td>
+                        <td><?=$row_movie['name']; ?></td>
+                        <td><?=$row_movie['description']; ?></td>
+                        <td><?=$row_movie['genre']; ?></td>
+                        <td></td>
+                    </tr>
+                <?php } ?>
             </tbody>
         </table>
     </div>
