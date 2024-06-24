@@ -72,8 +72,27 @@ $dir = 'posters/';
     <?php include 'editModal.php'; ?>
     <?php include 'deleteModal.php'; ?>
     <script>
+        let newModal = document.getElementById('newModal')
         let editModal = document.getElementById('editModal')
         let deleteModal = document.getElementById('deleteModal')
+        newModal.addEventListener('shown.bs.modal', event => {
+            newModal.querySelector('.modal-body #name').focus()
+        })
+        newModal.addEventListener('hide.bs.modal', event=>{
+            newModal.querySelector('.modal-body #name').value = ""
+            newModal.querySelector('.modal-body #description').value = ""
+            newModal.querySelector('.modal-body #genre').value = ""
+            newModal.querySelector('.modal-body #poster').value = ""
+        })
+
+        editModal.addEventListener('hide.bs.modal', event=>{
+            editModal.querySelector('.modal-body #name').value = ""
+            editModal.querySelector('.modal-body #description').value = ""
+            editModal.querySelector('.modal-body #genre').value = ""
+            editModal.querySelector('.modal-body #img_poster').value = ""
+            editModal.querySelector('.modal-body #poster').value = ""
+        })
+
         editModal.addEventListener('shown.bs.modal', event => {
             let button = event.relatedTarget
             let id = button.getAttribute('data-bs-id')
