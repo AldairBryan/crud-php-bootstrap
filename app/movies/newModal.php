@@ -19,6 +19,9 @@
                 <label for="genre" class="form-label">Genre:</label>
                 <select name="genre" id="genre" class="form-select" required>
                     <option value="">Select</option>
+                    <?php while($row_genre = $genres->fetch_assoc()) { ?>
+                        <option value="<?php echo $row_genre["id"]; ?>"> <?=$row_genre["name"] ?></option>
+                    <?php } ?>
                 </select>
             </div>
             <div class="mb-3">

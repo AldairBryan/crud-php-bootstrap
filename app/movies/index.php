@@ -1,3 +1,6 @@
+<?php
+require '../config/database.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,6 +36,10 @@
             </tbody>
         </table>
     </div>
+    <?php
+    $sqlGenre = "SELECT id, name FROM genre";
+    $genres = $conn->query($sqlGenre);
+    ?>
     <?php include 'newModal.php'; ?>
     <script src="../../assets/js/bootstrap.bundle.min.js"></script>
 </body>
