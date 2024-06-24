@@ -5,6 +5,7 @@ $sqlMovies = "SELECT m.id, m.name, m.description, g.name AS genre FROM movie AS 
 INNER JOIN genre as g 
 ON m.id_genre=g.id";
 $movies = $conn->query($sqlMovies);
+$dir = 'posters/';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +52,7 @@ $movies = $conn->query($sqlMovies);
                         <td><?=$row_movie['name']; ?></td>
                         <td><?=$row_movie['description']; ?></td>
                         <td><?=$row_movie['genre']; ?></td>
-                        <td></td>
+                        <td><img src="<?= $dir .$row_movie['id'].'.jpg'; ?>" width="100"></td>
                         <td>
                             <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-id="<?= $row_movie['id'] ?>"> <i class="fa-solid fa-pen-to-square"></i> Edit</a>
                             <a href="#" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="<?= $row_movie['id'] ?>"> <i class="fa-solid fa-trash"></i> Delete</a>
