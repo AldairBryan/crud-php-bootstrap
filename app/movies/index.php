@@ -43,6 +43,10 @@ $movies = $conn->query($sqlMovies);
                         <td><?=$row_movie['description']; ?></td>
                         <td><?=$row_movie['genre']; ?></td>
                         <td></td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-id="<?= $row_movie['id'] ?>"> <i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                            <a href="#" class="btn btn-sm btn-danger"> <i class="fa-solid fa-trash"></i> Delete</a>
+                        </td>
                     </tr>
                 <?php } ?>
             </tbody>
@@ -53,6 +57,36 @@ $movies = $conn->query($sqlMovies);
     $genres = $conn->query($sqlGenre);
     ?>
     <?php include 'newModal.php'; ?>
+    <?php $genres->data_seek(0);?>
+    <?php include 'editModal.php'; ?>
+    <script>
+        let editModal = document.getElementById('editModal')
+        editModal.addEventListener('shown.bs.modal', event => {
+            let button = event.relatedTarget
+            let id = button.getAttribute('data-bs-id')
+
+            let inputId = editModal.querySelector('.modal-body #id')
+            let inputName = editModal.querySelector('.modal-body #name')
+            let inputDescription = editModal.querySelector('.modal-body #description')
+            let inputGenre = editModal.querySelector('.modal-body #genre')
+
+            let url="getMovie.php"
+            let formData=new FormData()
+            formData.append('id', id)
+            fetch(url, {
+                method: "POST",
+                body: formData
+            }).then(response => response.json())
+            .then(data => {
+                inputId.value = data.id
+                inputName.value = data.name
+                inputDescription.value = data.description
+                inputGenre.value = data.id_genre
+
+            }).catch(err => console.log(err))
+
+        })
+    </script>
     <script src="../../assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
