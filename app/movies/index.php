@@ -45,7 +45,7 @@ $movies = $conn->query($sqlMovies);
                         <td></td>
                         <td>
                             <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-id="<?= $row_movie['id'] ?>"> <i class="fa-solid fa-pen-to-square"></i> Edit</a>
-                            <a href="#" class="btn btn-sm btn-danger"> <i class="fa-solid fa-trash"></i> Delete</a>
+                            <a href="#" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="<?= $row_movie['id'] ?>"> <i class="fa-solid fa-trash"></i> Delete</a>
                         </td>
                     </tr>
                 <?php } ?>
@@ -59,8 +59,10 @@ $movies = $conn->query($sqlMovies);
     <?php include 'newModal.php'; ?>
     <?php $genres->data_seek(0);?>
     <?php include 'editModal.php'; ?>
+    <?php include 'deleteModal.php'; ?>
     <script>
         let editModal = document.getElementById('editModal')
+        let deleteModal = document.getElementById('deleteModal')
         editModal.addEventListener('shown.bs.modal', event => {
             let button = event.relatedTarget
             let id = button.getAttribute('data-bs-id')
@@ -85,6 +87,12 @@ $movies = $conn->query($sqlMovies);
 
             }).catch(err => console.log(err))
 
+        })
+
+        deleteModal.addEventListener('shown.bs.modal', event => {
+            let button = event.relatedTarget
+            let id = button.getAttribute('data-bs-id')
+            deleteModal.querySelector('.modal-footer #id').value = id
         })
     </script>
     <script src="../../assets/js/bootstrap.bundle.min.js"></script>
