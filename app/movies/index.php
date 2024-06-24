@@ -21,12 +21,13 @@ $dir = 'posters/';
     <div class="container py-3">
         <h2 class="text-center">Movies</h2>
         <hr>
-        <?php if(isset($_SESSION['msg'])) { ?>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <?php if(isset($_SESSION['msg']) && isset($_SESSION['color'])) { ?>
+            <div class="alert alert-<?= $_SESSION['color']; ?> alert-dismissible fade show" role="alert">
                 <?= $_SESSION['msg']; ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php
+        unset($_SESSION['color']);
         unset($_SESSION['msg']);
         } ?>
         <div class="row justify-content-end">
@@ -52,7 +53,7 @@ $dir = 'posters/';
                         <td><?=$row_movie['name']; ?></td>
                         <td><?=$row_movie['description']; ?></td>
                         <td><?=$row_movie['genre']; ?></td>
-                        <td><img src="<?= $dir .$row_movie['id'].'.jpg'; ?>" width="100"></td>
+                        <td><img src="<?= $dir .$row_movie['id'].'.jpg?n=' . time(); ?>" width="100"></td>
                         <td>
                             <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-id="<?= $row_movie['id'] ?>"> <i class="fa-solid fa-pen-to-square"></i> Edit</a>
                             <a href="#" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="<?= $row_movie['id'] ?>"> <i class="fa-solid fa-trash"></i> Delete</a>
@@ -81,6 +82,7 @@ $dir = 'posters/';
             let inputName = editModal.querySelector('.modal-body #name')
             let inputDescription = editModal.querySelector('.modal-body #description')
             let inputGenre = editModal.querySelector('.modal-body #genre')
+            let poster = editModal.querySelector('.modal-body #img_poster')
 
             let url="getMovie.php"
             let formData=new FormData()
@@ -94,6 +96,7 @@ $dir = 'posters/';
                 inputName.value = data.name
                 inputDescription.value = data.description
                 inputGenre.value = data.id_genre
+                poster.src = '<?= $dir ?>'+data.id + '.jpg'
 
             }).catch(err => console.log(err))
 
