@@ -7,7 +7,7 @@
       </div>
       <div class="modal-body">
         <form action="update.php" method="post" enctype="multipart/form-data">
-          <input type="hidden" id="id" name="name">
+          <input type="hidden" id="id" name="id">
           
             <div class="mb-3">
                 <label for="name" class="form-label">Name:</label>
